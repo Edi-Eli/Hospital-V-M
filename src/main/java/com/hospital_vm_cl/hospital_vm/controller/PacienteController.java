@@ -45,7 +45,7 @@ public class PacienteController {
     public ResponseEntity<PacienteModel> actualizar(@PathVariable Long id, @RequestBody PacienteModel pacienteModel) {
         try {
             PacienteModel paciente = pacienteService.findById(id);
-            paciente.setId(id);
+            paciente.setIdPaciente(id);
             paciente.setRun(pacienteModel.getRun());
             paciente.setNombres(pacienteModel.getNombres());
             paciente.setApellidos(pacienteModel.getApellidos());

@@ -16,20 +16,24 @@ public class PacienteModel {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Long idPaciente;
 
-    @Column(unique=true, length=13, nullable=false)
+    @Column(unique=true, length=9, nullable=false)
     private String run;
 
-    @Column(nullable=false)
+    @Column(length=100, nullable=false)
     private String nombres;
 
-    @Column(nullable=false)
+    @Column(length=100, nullable=false)
     private String apellidos;
 
-    @Column(nullable=true)
+    @Column(nullable=false)
     private Date fechaNacimiento;
 
-    @Column(nullable=false)
+    @Column(length=100, nullable=true)
     private String correo;
+
+    @ManyToOne()
+    @JoinColumn(name="idTipoUsuario")
+    private TipoUsuarioModel tipoUsuario;
 }
