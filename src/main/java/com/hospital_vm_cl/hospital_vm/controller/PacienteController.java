@@ -53,7 +53,7 @@ public class PacienteController {
             paciente.setCorreo(pacienteModel.getCorreo());
 
             pacienteService.save(paciente);
-            return ResponseEntity.ok(paciente);
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

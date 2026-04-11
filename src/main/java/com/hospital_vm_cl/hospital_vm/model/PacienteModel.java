@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="paciente")
@@ -28,7 +28,7 @@ public class PacienteModel {
     private String apellidos;
 
     @Column(nullable=false)
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(length=100, nullable=true)
     private String correo;

@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table
@@ -19,10 +20,10 @@ public class AtencionModel {
     private Long idAtencion;
 
     @Column(nullable=false)
-    private Date fechaAtencion;
+    private LocalDate fechaAtencion;
 
     @Column(nullable=false)
-    private Date horaAtencion;
+    private LocalTime horaAtencion;
 
     @Column(nullable=false)
     private int costo;
