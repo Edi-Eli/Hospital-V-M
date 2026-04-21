@@ -2,6 +2,7 @@ package com.hospital_vm_cl.hospital_vm.controller;
 
 import com.hospital_vm_cl.hospital_vm.model.FichaPacienteModel;
 import com.hospital_vm_cl.hospital_vm.service.FichaPacienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class FichaPacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FichaPacienteModel> buscar(@PathVariable Long id) {
+    public ResponseEntity<FichaPacienteModel> buscar(@Valid @PathVariable Long id) {
         try {
             FichaPacienteModel fichaPaciente = fichaPacienteService.findById(id);
             return ResponseEntity.ok(fichaPaciente);
@@ -36,13 +37,13 @@ public class FichaPacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<FichaPacienteModel> guardar(@RequestBody FichaPacienteModel fichaPacienteModel) {
+    public ResponseEntity<FichaPacienteModel> guardar(@Valid @RequestBody FichaPacienteModel fichaPacienteModel) {
         FichaPacienteModel nuevo = fichaPacienteService.save(fichaPacienteModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FichaPacienteModel> actualizar(@PathVariable Long id, @RequestBody FichaPacienteModel fichaPacienteModel) {
+    public ResponseEntity<FichaPacienteModel> actualizar(@Valid @PathVariable Long id, @RequestBody FichaPacienteModel fichaPacienteModel) {
         try {
             FichaPacienteModel fichaPaciente = fichaPacienteService.findById(id);
             fichaPaciente.setIdFichaPaciente(id);
@@ -61,7 +62,7 @@ public class FichaPacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@Valid @PathVariable Long id) {
         try {
             fichaPacienteService.delete(id);
             return ResponseEntity.noContent().build();

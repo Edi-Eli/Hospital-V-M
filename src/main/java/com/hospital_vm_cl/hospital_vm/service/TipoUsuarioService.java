@@ -20,7 +20,9 @@ public class TipoUsuarioService {
     }
 
     public TipoUsuarioModel findById(Long id) {
-        return tipoUsuarioRepository.findById(id).get();
+        return tipoUsuarioRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Tipo de usuario no encontrado con id: " + id));
     }
 
     public TipoUsuarioModel save(TipoUsuarioModel pacienteModel) {
@@ -28,6 +30,9 @@ public class TipoUsuarioService {
     }
 
     public void delete(Long id) {
+        if (!tipoUsuarioRepository.existsById(id)) {
+            throw new RuntimeException("Tipo de usuario no encontrado con id: " + id);
+        }
         tipoUsuarioRepository.deleteById(id);
     }
 }

@@ -22,7 +22,9 @@ public class FichaPacienteService {
     }
 
     public FichaPacienteModel findById(Long id) {
-        return fichaPacienteRepository.findById(id).get();
+        return fichaPacienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Ficha del paciente no encontrada con id: " + id));
     }
 
     public FichaPacienteModel save(FichaPacienteModel fichaPacienteModel) {
@@ -30,6 +32,9 @@ public class FichaPacienteService {
     }
 
     public void delete(Long id) {
+        if (!fichaPacienteRepository.existsById(id)) {
+            throw new RuntimeException("Ficha del paciente no encontrada con id: " + id);
+        }
         fichaPacienteRepository.deleteById(id);
     }
 }

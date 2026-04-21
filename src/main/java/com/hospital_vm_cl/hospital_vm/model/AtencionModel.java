@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,12 +20,15 @@ public class AtencionModel {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idAtencion;
 
+    @NotNull(message = "La fecha no puede ser nula")
     @Column(nullable=false)
     private LocalDate fechaAtencion;
 
+    @NotNull(message = "La hora no puede ser nula")
     @Column(nullable=false)
     private LocalTime horaAtencion;
 
+    @NotNull(message = "El costo no puede estar vacío")
     @Column(nullable=false)
     private int costo;
 

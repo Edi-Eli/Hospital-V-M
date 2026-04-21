@@ -20,7 +20,9 @@ public class AtencionService {
     }
 
     public AtencionModel findById(Long id) {
-        return atencionRepository.findById(id).get();
+        return atencionRepository.findById(id)
+                .orElseThrow(() ->
+                new RuntimeException("Atencion no encontrada con id: " + id));
     }
 
     public AtencionModel save(AtencionModel pacienteModel) {
@@ -28,6 +30,9 @@ public class AtencionService {
     }
 
     public void delete(Long id) {
+        if (!atencionRepository.existsById(id)) {
+            throw new RuntimeException("No existe atencion con el id: " + id);
+        }
         atencionRepository.deleteById(id);
     }
 }

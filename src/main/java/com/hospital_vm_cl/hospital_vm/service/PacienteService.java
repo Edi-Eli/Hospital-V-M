@@ -20,7 +20,9 @@ public class PacienteService {
     }
 
     public PacienteModel findById(Long id) {
-        return pacienteRepository.findById(id).get();
+        return pacienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Paciente no encontrado con id: " + id));
     }
 
     public PacienteModel save(PacienteModel pacienteModel) {
@@ -28,6 +30,9 @@ public class PacienteService {
     }
 
     public void delete(Long id) {
+        if (!pacienteRepository.existsById(id)) {
+            throw new RuntimeException("Paciente no encontrado con id: " + id);
+        }
         pacienteRepository.deleteById(id);
     }
 }

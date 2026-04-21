@@ -2,6 +2,7 @@ package com.hospital_vm_cl.hospital_vm.controller;
 
 import com.hospital_vm_cl.hospital_vm.model.PacienteModel;
 import com.hospital_vm_cl.hospital_vm.service.PacienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteModel> buscar(@PathVariable Long id) {
+    public ResponseEntity<PacienteModel> buscar(@Valid @PathVariable Long id) {
         try {
             PacienteModel paciente = pacienteService.findById(id);
             return ResponseEntity.ok(paciente);
@@ -36,13 +37,13 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<PacienteModel> guardar(@RequestBody PacienteModel pacienteModel) {
+    public ResponseEntity<PacienteModel> guardar(@Valid @RequestBody PacienteModel pacienteModel) {
         PacienteModel nuevo = pacienteService.save(pacienteModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PacienteModel> actualizar(@PathVariable Long id, @RequestBody PacienteModel pacienteModel) {
+    public ResponseEntity<PacienteModel> actualizar(@Valid @PathVariable Long id, @RequestBody PacienteModel pacienteModel) {
         try {
             PacienteModel paciente = pacienteService.findById(id);
             paciente.setIdPaciente(id);
@@ -60,7 +61,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@Valid @PathVariable Long id) {
         try {
             pacienteService.delete(id);
             return ResponseEntity.noContent().build();

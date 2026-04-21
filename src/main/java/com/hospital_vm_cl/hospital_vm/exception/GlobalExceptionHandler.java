@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleException(Exception ex) {
-        return new ApiError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleException(RuntimeException ex) {
+        return new ApiError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 }
